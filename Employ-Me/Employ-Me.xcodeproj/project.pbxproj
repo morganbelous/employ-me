@@ -11,6 +11,11 @@
 		6321FD7C24344A76007544DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6321FD7B24344A76007544DB /* Assets.xcassets */; };
 		6321FD7F24344A76007544DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6321FD7E24344A76007544DB /* Preview Assets.xcassets */; };
 		6321FD8224344A76007544DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6321FD8024344A76007544DB /* LaunchScreen.storyboard */; };
+		6321FD8A24344C22007544DB /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD8924344C22007544DB /* Job.swift */; };
+		6321FD8C24344C38007544DB /* JobCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD8B24344C38007544DB /* JobCollectionViewCell.swift */; };
+		6321FD8E24344C55007544DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD8D24344C55007544DB /* ViewController.swift */; };
+		6321FD9024344C60007544DB /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD8F24344C60007544DB /* DetailsViewController.swift */; };
+		6321FD9224344C71007544DB /* AddJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD9124344C71007544DB /* AddJobViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +25,11 @@
 		6321FD7E24344A76007544DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6321FD8124344A76007544DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6321FD8324344A76007544DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6321FD8924344C22007544DB /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		6321FD8B24344C38007544DB /* JobCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCollectionViewCell.swift; sourceTree = "<group>"; };
+		6321FD8D24344C55007544DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6321FD8F24344C60007544DB /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		6321FD9124344C71007544DB /* AddJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				6321FD7524344A73007544DB /* AppDelegate.swift */,
+				6321FD8D24344C55007544DB /* ViewController.swift */,
+				6321FD9124344C71007544DB /* AddJobViewController.swift */,
+				6321FD8F24344C60007544DB /* DetailsViewController.swift */,
+				6321FD8B24344C38007544DB /* JobCollectionViewCell.swift */,
+				6321FD8924344C22007544DB /* Job.swift */,
 				6321FD7B24344A76007544DB /* Assets.xcassets */,
 				6321FD8024344A76007544DB /* LaunchScreen.storyboard */,
 				6321FD8324344A76007544DB /* Info.plist */,
@@ -140,7 +155,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6321FD8C24344C38007544DB /* JobCollectionViewCell.swift in Sources */,
 				6321FD7624344A73007544DB /* AppDelegate.swift in Sources */,
+				6321FD8E24344C55007544DB /* ViewController.swift in Sources */,
+				6321FD8A24344C22007544DB /* Job.swift in Sources */,
+				6321FD9224344C71007544DB /* AddJobViewController.swift in Sources */,
+				6321FD9024344C60007544DB /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
