@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol addJobDelegate: class {
     func postJob(newTitle: String, newName: String, newEmail: String, newPrice: String, newBio: String, newPicture: UIImage)
@@ -38,7 +39,6 @@ class ViewController: UIViewController {
         layout.minimumInteritemSpacing = topPadding
         
         searchBar = UISearchBar()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = "Search by job type"
         let searchBarText = searchBar.value(forKey: "searchField") as? UITextField
@@ -47,7 +47,6 @@ class ViewController: UIViewController {
         view.addSubview(searchBar)
         
         addJobButton = UIButton()
-        addJobButton.translatesAutoresizingMaskIntoConstraints = false
         addJobButton.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
         addJobButton.setTitle("Add job", for: .normal)
         addJobButton.setTitleColor(.white, for: .normal)
@@ -66,7 +65,6 @@ class ViewController: UIViewController {
         filteredJobs = jobs
         
         jobCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        jobCollectionView.translatesAutoresizingMaskIntoConstraints = false
         jobCollectionView.backgroundColor = .white
          jobCollectionView.register(JobCollectionViewCell.self, forCellWithReuseIdentifier: jobCellReuseIdentifier)
         jobCollectionView.dataSource = self
@@ -79,28 +77,22 @@ class ViewController: UIViewController {
     
     func setUpConstraints(){
         
-        NSLayoutConstraint.activate([
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: sidePadding),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-            searchBar.heightAnchor.constraint(equalToConstant: 40),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        searchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: sidePadding, bottom: 0, right: 100))
+            make.height.equalTo(40)
+        }
         
-        ])
+        addJobButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.right.equalTo(view).offset(-sidePadding)
+            make.left.equalTo(searchBar.snp.right).offset(sidePadding)
+            make.height.equalTo(40)
+        }
         
-        NSLayoutConstraint.activate([
-            addJobButton.leadingAnchor.constraint(equalTo: searchBar.trailingAnchor, constant: sidePadding),
-            addJobButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -sidePadding),
-            addJobButton.heightAnchor.constraint(equalToConstant: 40),
-            addJobButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
-        
-        ])
-  
-        NSLayoutConstraint.activate([
-            jobCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 75),
-            jobCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: sidePadding),
-            jobCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            jobCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -sidePadding)
-        ])
+        jobCollectionView.snp.makeConstraints { make in
+            make.top.right.bottom.left.equalTo(view.safeAreaLayoutGuide).inset(UIEdgeInsets(top: 70, left: sidePadding, bottom: 0, right: sidePadding))
+        }
     }
     
     //func getJobs(){

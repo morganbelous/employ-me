@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class DetailsViewController: UIViewController {
     
@@ -28,6 +29,9 @@ class DetailsViewController: UIViewController {
     
     var moneyImageView: UIImageView!
     var mailImageView: UIImageView!
+    
+    let pictureWidth: CGFloat = UIScreen.main.bounds.width * 0.3
+    let iconWidth: CGFloat = UIScreen.main.bounds.width * 0.1
     
     init(jobTitle: String, jobName: String, jobEmail: String, jobPrice: String, jobBio: String, jobPicture: UIImage) {
         self.jobTitle = jobTitle
@@ -51,53 +55,37 @@ class DetailsViewController: UIViewController {
         
         
         titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = jobTitle
         titleLabel.textColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         view.addSubview(titleLabel)
         
         nameLabel = UILabel()
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.text = jobName
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
         nameLabel.textColor = UIColor(red: 249/255, green: 184/255, blue: 19/255, alpha: 1)
         view.addSubview(nameLabel)
         
         emailLabel = UILabel()
-        emailLabel.translatesAutoresizingMaskIntoConstraints = false
         emailLabel.text = jobEmail
         emailLabel.font = UIFont.boldSystemFont(ofSize: 20)
         emailLabel.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
         view.addSubview(emailLabel)
         
         priceLabel = UILabel()
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.text = jobPrice
         priceLabel.font = UIFont.boldSystemFont(ofSize: 20)
         priceLabel.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
         view.addSubview(priceLabel)
         
         bioTextView = UITextView()
-        bioTextView.translatesAutoresizingMaskIntoConstraints = false
         bioTextView.text = jobBio
         bioTextView.font = UIFont.boldSystemFont(ofSize: 20)
         bioTextView.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
         bioTextView.font = UIFont.systemFont(ofSize: 18)
         view.addSubview(bioTextView)
         
-
-        pictureView = UIImageView()
-        pictureView.translatesAutoresizingMaskIntoConstraints = false
-        pictureView.image = jobPicture
-        pictureView.contentMode = .scaleAspectFill
-        pictureView.layer.cornerRadius = 10
-        pictureView.clipsToBounds = true
-        view.addSubview(pictureView)
-        
-        
         pictureBox = UIView()
-        pictureBox.translatesAutoresizingMaskIntoConstraints = false
         pictureBox.backgroundColor = .white
         pictureBox.layer.cornerRadius = 10
         pictureBox.layer.shadowColor = UIColor.black.cgColor
@@ -106,20 +94,23 @@ class DetailsViewController: UIViewController {
         pictureBox.layer.shadowOffset = CGSize(width: 1, height: 1)
         view.addSubview(pictureBox)
         
+        pictureView = UIImageView()
+        pictureView.image = jobPicture
+        pictureView.contentMode = .scaleAspectFill
+        pictureView.layer.cornerRadius = 10
+        pictureView.clipsToBounds = true
+        view.addSubview(pictureView)
+    
         moneyImageView = UIImageView()
-        moneyImageView.translatesAutoresizingMaskIntoConstraints = false
         moneyImageView.image = UIImage(named: "dollar.png")
         moneyImageView.clipsToBounds = true
         view.addSubview(moneyImageView)
         
         mailImageView = UIImageView()
-        mailImageView.translatesAutoresizingMaskIntoConstraints = false
         mailImageView.image = UIImage(named: "mail.png")
         mailImageView.clipsToBounds = true
         view.addSubview(mailImageView)
         
-        
-        view.addSubview(pictureView)
         
         setUpConstraints()
 
@@ -127,62 +118,57 @@ class DetailsViewController: UIViewController {
     
     func setUpConstraints(){
         
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,  constant: 200)
-        ])
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.top).offset(200)
+        }
         
-        NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,  constant: 20)
-        ])
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(40)
+            make.left.equalTo(view).offset(20)
+        }
+               
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(20)
+            make.left.equalTo(view).offset(50)
+        }
         
-        NSLayoutConstraint.activate([
-            emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
-            emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,  constant: 50)
-        ])
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailLabel.snp.bottom).offset(20)
+            make.left.equalTo(view).offset(50)
+        }
         
-        NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20),
-            priceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,  constant: 50)
-        ])
+        bioTextView.snp.makeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom).offset(20)
+            make.right.equalTo(view).offset(-20)
+            make.bottom.equalTo(priceLabel.snp.bottom).offset(500)
+            make.left.equalTo(view).offset(18)
+        }
         
-        NSLayoutConstraint.activate([
-            bioTextView.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 20),
-            bioTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            bioTextView.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 500),
-            bioTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor,  constant: 18)
-        ])
+        pictureView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.centerX.equalTo(view)
+            make.width.height.equalTo(pictureWidth)
+        }
         
+        pictureBox.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.centerX.equalTo(view)
+            make.width.height.equalTo(pictureWidth)
+        }
         
-        NSLayoutConstraint.activate([
-            pictureView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            pictureView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pictureView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3),
-            pictureView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3)
-        ])
+        moneyImageView.snp.makeConstraints { make in
+            make.right.equalTo(priceLabel.snp.left)
+            make.centerY.equalTo(priceLabel.snp.centerY)
+            make.width.height.equalTo(iconWidth)
+        }
         
-        NSLayoutConstraint.activate([
-            pictureBox.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            pictureBox.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pictureBox.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3),
-            pictureBox.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3)
-        ])
-        
-        NSLayoutConstraint.activate([
-            moneyImageView.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor),
-            moneyImageView.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
-            moneyImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.1),
-            moneyImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.1)
-        ])
-        
-        NSLayoutConstraint.activate([
-            mailImageView.trailingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
-            mailImageView.centerYAnchor.constraint(equalTo: emailLabel.centerYAnchor, constant: 2),
-            mailImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.1),
-            mailImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.1)
-        ])
-          
+        mailImageView.snp.makeConstraints { make in
+            make.right.equalTo(emailLabel.snp.left).offset(-2)
+            make.centerY.equalTo(emailLabel.snp.centerY).offset(1)
+            make.width.height.equalTo(iconWidth)
+        }
+     
         
     }
 

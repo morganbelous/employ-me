@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A307E75AAB1B226966CE1E1 /* Pods_Employ_Me.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D196F05601E841CE4CA57211 /* Pods_Employ_Me.framework */; };
 		6321FD7624344A73007544DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD7524344A73007544DB /* AppDelegate.swift */; };
 		6321FD7C24344A76007544DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6321FD7B24344A76007544DB /* Assets.xcassets */; };
 		6321FD7F24344A76007544DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6321FD7E24344A76007544DB /* Preview Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46E13A65069200C46A6DF07E /* Pods-Employ-Me.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Employ-Me.release.xcconfig"; path = "Target Support Files/Pods-Employ-Me/Pods-Employ-Me.release.xcconfig"; sourceTree = "<group>"; };
 		6321FD7224344A73007544DB /* Employ-Me.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Employ-Me.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6321FD7524344A73007544DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6321FD7B24344A76007544DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -30,6 +32,8 @@
 		6321FD8D24344C55007544DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6321FD8F24344C60007544DB /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		6321FD9124344C71007544DB /* AddJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
+		9340D51C9DEF1469DD46995E /* Pods-Employ-Me.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Employ-Me.debug.xcconfig"; path = "Target Support Files/Pods-Employ-Me/Pods-Employ-Me.debug.xcconfig"; sourceTree = "<group>"; };
+		D196F05601E841CE4CA57211 /* Pods_Employ_Me.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Employ_Me.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +41,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A307E75AAB1B226966CE1E1 /* Pods_Employ_Me.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C3855C8445B785273E54845 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9340D51C9DEF1469DD46995E /* Pods-Employ-Me.debug.xcconfig */,
+				46E13A65069200C46A6DF07E /* Pods-Employ-Me.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6321FD6924344A73007544DB = {
 			isa = PBXGroup;
 			children = (
 				6321FD7424344A73007544DB /* Employ-Me */,
 				6321FD7324344A73007544DB /* Products */,
+				5C3855C8445B785273E54845 /* Pods */,
+				8FBF1D4DED0E825E5DFEBD08 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +101,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8FBF1D4DED0E825E5DFEBD08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D196F05601E841CE4CA57211 /* Pods_Employ_Me.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,9 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6321FD8624344A76007544DB /* Build configuration list for PBXNativeTarget "Employ-Me" */;
 			buildPhases = (
+				6B4F6E69BDBAC8F8B724ABDE /* [CP] Check Pods Manifest.lock */,
 				6321FD6E24344A73007544DB /* Sources */,
 				6321FD6F24344A73007544DB /* Frameworks */,
 				6321FD7024344A73007544DB /* Resources */,
+				764C40B782B33B7A48748AEA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +176,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B4F6E69BDBAC8F8B724ABDE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Employ-Me-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		764C40B782B33B7A48748AEA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6321FD6E24344A73007544DB /* Sources */ = {
@@ -294,6 +363,7 @@
 		};
 		6321FD8724344A76007544DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9340D51C9DEF1469DD46995E /* Pods-Employ-Me.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -313,6 +383,7 @@
 		};
 		6321FD8824344A76007544DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46E13A65069200C46A6DF07E /* Pods-Employ-Me.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

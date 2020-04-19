@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class JobCollectionViewCell: UICollectionViewCell {
     
@@ -18,15 +19,11 @@ class JobCollectionViewCell: UICollectionViewCell {
     var pictureView: UIImageView!
     
     
-    
-    
     override init(frame: CGRect){
         super.init(frame: frame)
-        
-        
+
         
         box = UIView()
-        box.translatesAutoresizingMaskIntoConstraints = false
         box.backgroundColor = .white
         box.layer.cornerRadius = 10
         box.layer.shadowColor = UIColor.black.cgColor
@@ -36,30 +33,24 @@ class JobCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(box)
         
         titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         contentView.addSubview(titleLabel)
         
         nameLabel = UILabel()
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.textColor = UIColor(red: 249/255, green: 184/255, blue: 19/255, alpha: 1)
         contentView.addSubview(nameLabel)
         
         priceLabel = UILabel()
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
         priceLabel.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
         contentView.addSubview(priceLabel)
         
         pictureView = UIImageView()
-        pictureView.translatesAutoresizingMaskIntoConstraints = false
         pictureView.contentMode = .scaleAspectFill
         pictureView.clipsToBounds = true
         pictureView.layer.cornerRadius = 10
         contentView.addSubview(pictureView)
-        
-        
-        
+          
         setUpConstraints()
     }
     
@@ -76,44 +67,36 @@ class JobCollectionViewCell: UICollectionViewCell {
     
     func setUpConstraints(){
         
-        NSLayoutConstraint.activate([
-            box.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            box.topAnchor.constraint(equalTo: contentView.topAnchor),
-            box.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            box.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+        box.snp.makeConstraints { make in
+            make.top.bottom.equalTo(contentView)
+            make.right.equalTo(contentView).offset(-5)
+            make.left.equalTo(contentView).offset(5)
+        }
         
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: box.topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor,  constant: 20)
-        ])
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(box).offset(10)
+            make.left.equalTo(pictureView.snp.right).offset(20)
+        }
         
-        NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: box.topAnchor, constant: 50),
-            nameLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor,  constant: 20)
-
-        ])
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(box).offset(50)
+            make.left.equalTo(pictureView.snp.right).offset(20)
+        }
         
-        NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: box.topAnchor, constant: 80),
-            priceLabel.leadingAnchor.constraint(equalTo: pictureView.trailingAnchor,  constant: 20)
-        ])
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(box).offset(80)
+            make.left.equalTo(pictureView.snp.right).offset(20)
+        }
         
-        NSLayoutConstraint.activate([
-            pictureView.topAnchor.constraint(equalTo: box.topAnchor, constant: 5),
-            pictureView.bottomAnchor.constraint(equalTo: box.bottomAnchor, constant: -5),
-            pictureView.leadingAnchor.constraint(equalTo: box.leadingAnchor, constant: 5),
-            pictureView.widthAnchor.constraint(equalToConstant: contentView.frame.width * 0.4),
-            
-
-        ])
-   
+        
+        pictureView.snp.makeConstraints { make in
+            make.top.bottom.left.equalTo(box).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0))
+            make.width.equalTo(contentView.frame.width * 0.4)
+        }
+        
     }
-    
-    
-    
 
-    
+      
     
 }
 

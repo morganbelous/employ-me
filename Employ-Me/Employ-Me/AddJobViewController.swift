@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class AddJobViewController: UIViewController {
     
@@ -37,6 +38,8 @@ class AddJobViewController: UIViewController {
     var addJobButton: UIButton!
     var cancelButton: UIButton!
     
+    let fieldWidth: CGFloat = UIScreen.main.bounds.width * 0.7
+    
     weak var delegate: addJobDelegate?
     
     override func viewDidLoad() {
@@ -45,95 +48,76 @@ class AddJobViewController: UIViewController {
         view.backgroundColor = .white
         
         viewTitle = UILabel()
-        viewTitle.translatesAutoresizingMaskIntoConstraints = false
         viewTitle.text = "Post a New Job!"
         viewTitle.textColor = UIColor(red: 249/255, green: 184/255, blue: 19/255, alpha: 1)
         viewTitle.font = UIFont.boldSystemFont(ofSize: 30)
         view.addSubview(viewTitle)
         
         titleTextLabel = UILabel()
-        titleTextLabel.translatesAutoresizingMaskIntoConstraints = false
         titleTextLabel.text = "Title:"
         view.addSubview(titleTextLabel)
         
         titleTextField = UITextField()
-        titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.placeholder = "Enter job title"
         titleTextField.borderStyle = .roundedRect
         titleTextField.clearsOnBeginEditing = true
         view.addSubview(titleTextField)
         
         titleErrorMessage = UILabel()
-        titleErrorMessage.translatesAutoresizingMaskIntoConstraints = false
-        titleErrorMessage.text = ""
         titleErrorMessage.font = UIFont.systemFont(ofSize: 16)
         titleErrorMessage.textColor = .red
         view.addSubview(titleErrorMessage)
      
         nameTextLabel = UILabel()
-        nameTextLabel.translatesAutoresizingMaskIntoConstraints = false
         nameTextLabel.text = "Name:"
         view.addSubview(nameTextLabel)
         
         nameTextField = UITextField()
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.placeholder = "Enter your name"
         nameTextField.borderStyle = .roundedRect
         nameTextField.clearsOnBeginEditing = true
         view.addSubview(nameTextField)
         
         nameErrorMessage = UILabel()
-        nameErrorMessage.translatesAutoresizingMaskIntoConstraints = false
-        nameErrorMessage.text = ""
         nameErrorMessage.font = UIFont.systemFont(ofSize: 16)
         nameErrorMessage.textColor = .red
         view.addSubview(nameErrorMessage)
         
         emailTextLabel = UILabel()
-        emailTextLabel.translatesAutoresizingMaskIntoConstraints = false
         emailTextLabel.text = "Email:"
         view.addSubview(emailTextLabel)
         
         emailTextField = UITextField()
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.placeholder = "Enter your email"
         emailTextField.borderStyle = .roundedRect
         emailTextField.clearsOnBeginEditing = true
         view.addSubview(emailTextField)
         
         emailErrorMessage = UILabel()
-        emailErrorMessage.translatesAutoresizingMaskIntoConstraints = false
-        emailErrorMessage.text = ""
         emailErrorMessage.font = UIFont.systemFont(ofSize: 16)
         emailErrorMessage.textColor = .red
         view.addSubview(emailErrorMessage)
         
         priceTextLabel = UILabel()
-        priceTextLabel.translatesAutoresizingMaskIntoConstraints = false
         priceTextLabel.text = "Price:"
         view.addSubview(priceTextLabel)
         
         priceTextField = UITextField()
-        priceTextField.translatesAutoresizingMaskIntoConstraints = false
         priceTextField.placeholder = "Ex. $20 an hour"
         priceTextField.borderStyle = .roundedRect
         priceTextField.clearsOnBeginEditing = true
         view.addSubview(priceTextField)
         
         priceErrorMessage = UILabel()
-        priceErrorMessage.translatesAutoresizingMaskIntoConstraints = false
-        priceErrorMessage.text = ""
         priceErrorMessage.font = UIFont.systemFont(ofSize: 16)
         priceErrorMessage.textColor = .red
         view.addSubview(priceErrorMessage)
         
         bioTextLabel = UILabel()
-        bioTextLabel.translatesAutoresizingMaskIntoConstraints = false
         bioTextLabel.text = "Bio:"
         view.addSubview(bioTextLabel)
         
         bioTextView = UITextView()
-        bioTextView.translatesAutoresizingMaskIntoConstraints = false
         bioTextView.isEditable = true
         bioTextView.backgroundColor = UIColor(red: 202/255, green: 202/255, blue: 202/255, alpha: 1)
         bioTextView.clearsOnInsertion = true
@@ -142,19 +126,15 @@ class AddJobViewController: UIViewController {
         view.addSubview(bioTextView)
         
         bioErrorMessage = UILabel()
-        bioErrorMessage.translatesAutoresizingMaskIntoConstraints = false
-        bioErrorMessage.text = ""
         bioErrorMessage.font = UIFont.systemFont(ofSize: 16)
         bioErrorMessage.textColor = .red
         view.addSubview(bioErrorMessage)
         
         pictureLabel = UILabel()
-        pictureLabel.translatesAutoresizingMaskIntoConstraints = false
         pictureLabel.text = "Add a photo:"
         view.addSubview(pictureLabel)
         
         pictureButton = UIButton()
-        pictureButton.translatesAutoresizingMaskIntoConstraints = false
         pictureButton.addTarget(self, action: #selector(showImagePicker), for: .touchUpInside)
         pictureButton.setImage(UIImage(named:"empty-image.jpg"), for: .normal)
         pictureButton.layer.cornerRadius = 10
@@ -164,7 +144,6 @@ class AddJobViewController: UIViewController {
         imagePicker.delegate = self
 
         addJobButton = UIButton()
-        addJobButton.translatesAutoresizingMaskIntoConstraints = false
         addJobButton.setTitle("Post Job", for: .normal)
         addJobButton.setTitleColor(UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1), for: .normal)
         addJobButton.layer.borderWidth = 2
@@ -174,7 +153,6 @@ class AddJobViewController: UIViewController {
         view.addSubview(addJobButton)
         
         cancelButton = UIButton()
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.setTitleColor(UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1), for: .normal)
         cancelButton.layer.borderWidth = 2
@@ -188,126 +166,123 @@ class AddJobViewController: UIViewController {
     
     func setUpConstraints(){
         
-        NSLayoutConstraint.activate([
-            viewTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            viewTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
+        viewTitle.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.centerX.equalTo(view)
+        }
         
-        NSLayoutConstraint.activate([
-            titleErrorMessage.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            titleErrorMessage.bottomAnchor.constraint(equalTo: titleTextField.topAnchor, constant: -20),
-        ])
+        titleErrorMessage.snp.makeConstraints { make in
+            make.left.equalTo(titleTextField.snp.left)
+            make.bottom.equalTo(titleTextField.snp.top).offset(-20)
+        }
         
-        NSLayoutConstraint.activate([
-            titleTextLabel.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
-            titleTextLabel.bottomAnchor.constraint(equalTo: titleTextField.topAnchor, constant: -3)
-        ])
+        titleTextLabel.snp.makeConstraints { make in
+            make.left.equalTo(titleTextField.snp.left)
+            make.bottom.equalTo(titleTextField.snp.top).offset(-3)
+        }
         
-        NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            titleTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleTextField.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width * 0.7),
-            titleTextField.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        titleTextField.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
+            make.centerX.equalTo(view)
+            make.width.equalTo(fieldWidth)
+            make.height.equalTo(30)
+        }
         
-        NSLayoutConstraint.activate([
-            nameErrorMessage.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
-            nameErrorMessage.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -20),
-        ])
-        
-        NSLayoutConstraint.activate([
-            nameTextLabel.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor),
-            nameTextLabel.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -3)
-        ])
-         
-        NSLayoutConstraint.activate([
-            nameTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 45),
-            nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameTextField.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width * 0.7),
-            nameTextField.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            emailErrorMessage.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            emailErrorMessage.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -20),
-            
-        ])
-        
-        NSLayoutConstraint.activate([
-            emailTextLabel.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
-            emailTextLabel.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -2)
-        ])
+        nameErrorMessage.snp.makeConstraints { make in
+            make.left.equalTo(nameTextField.snp.left)
+            make.bottom.equalTo(nameTextField.snp.top).offset(-20)
+        }
         
         
-        NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 45),
-            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emailTextField.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width * 0.7),
-            emailTextField.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        nameTextLabel.snp.makeConstraints { make in
+            make.left.equalTo(nameTextField.snp.left)
+            make.bottom.equalTo(nameTextField.snp.top).offset(-3)
+        }
         
-        NSLayoutConstraint.activate([
-            priceErrorMessage.leadingAnchor.constraint(equalTo: priceTextField.leadingAnchor),
-            priceErrorMessage.bottomAnchor.constraint(equalTo: priceTextField.topAnchor, constant: -20),
-        ])
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleTextField.snp.bottom).offset(45)
+            make.centerX.equalTo(view)
+            make.width.equalTo(fieldWidth)
+            make.height.equalTo(30)
+        }
         
-        NSLayoutConstraint.activate([
-            priceTextLabel.leadingAnchor.constraint(equalTo: priceTextField.leadingAnchor),
-            priceTextLabel.bottomAnchor.constraint(equalTo: priceTextField.topAnchor, constant: -2)
-        ])
-          
-        NSLayoutConstraint.activate([
-            priceTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 45),
-            priceTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            priceTextField.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width * 0.7),
-            priceTextField.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        emailErrorMessage.snp.makeConstraints { make in
+            make.left.equalTo(emailTextField.snp.left)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-20)
+        }
         
-        NSLayoutConstraint.activate([
-            bioErrorMessage.leadingAnchor.constraint(equalTo: bioTextView.leadingAnchor),
-            bioErrorMessage.bottomAnchor.constraint(equalTo: bioTextView.topAnchor, constant: -20),
-        ])
+        emailTextLabel.snp.makeConstraints { make in
+            make.left.equalTo(emailTextField.snp.left)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-3)
+        }
         
-        NSLayoutConstraint.activate([
-            bioTextLabel.leadingAnchor.constraint(equalTo: bioTextView.leadingAnchor),
-            bioTextLabel.bottomAnchor.constraint(equalTo: bioTextView.topAnchor, constant: -2)
-        ])
-          
-        NSLayoutConstraint.activate([
-            bioTextView.topAnchor.constraint(equalTo: priceTextField.bottomAnchor, constant: 45),
-            bioTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bioTextView.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width * 0.7),
-            bioTextView.heightAnchor.constraint(equalToConstant: 150)
-        ])
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(45)
+            make.centerX.equalTo(view)
+            make.width.equalTo(fieldWidth)
+            make.height.equalTo(30)
+        }
         
-        NSLayoutConstraint.activate([
-            pictureLabel.leadingAnchor.constraint(equalTo: pictureButton.leadingAnchor),
-            pictureLabel.bottomAnchor.constraint(equalTo: pictureButton.topAnchor, constant: -2)
+        priceErrorMessage.snp.makeConstraints { make in
+            make.left.equalTo(priceTextField.snp.left)
+            make.bottom.equalTo(priceTextField.snp.top).offset(-20)
+        }
         
-        ])
+        priceTextLabel.snp.makeConstraints { make in
+            make.left.equalTo(priceTextField.snp.left)
+            make.bottom.equalTo(priceTextField.snp.top).offset(-3)
+        }
         
-        NSLayoutConstraint.activate([
-            pictureButton.topAnchor.constraint(equalTo: bioTextView.bottomAnchor, constant: 35),
-            pictureButton.leadingAnchor.constraint(equalTo: bioTextView.leadingAnchor),
-            pictureButton.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width * 0.5),
-            pictureButton.heightAnchor.constraint(equalToConstant: 150)
-        ])
+        priceTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(45)
+            make.centerX.equalTo(view)
+            make.width.equalTo(fieldWidth)
+            make.height.equalTo(30)
+        }
         
-        NSLayoutConstraint.activate([
-            addJobButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
-            addJobButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -20),
-            addJobButton.heightAnchor.constraint(equalToConstant: 40),
-            addJobButton.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        bioErrorMessage.snp.makeConstraints { make in
+            make.left.equalTo(bioTextView.snp.left)
+            make.bottom.equalTo(bioTextView.snp.top).offset(-20)
+        }
         
-        NSLayoutConstraint.activate([
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
-            cancelButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 20),
-            cancelButton.heightAnchor.constraint(equalToConstant: 40),
-            cancelButton.widthAnchor.constraint(equalToConstant: 100)
-
-        ])
-            
+        bioTextLabel.snp.makeConstraints { make in
+            make.left.equalTo(bioTextView.snp.left)
+            make.bottom.equalTo(bioTextView.snp.top).offset(-3)
+        }
+        
+        bioTextView.snp.makeConstraints { make in
+            make.top.equalTo(priceTextField.snp.bottom).offset(45)
+            make.centerX.equalTo(view)
+            make.width.equalTo(fieldWidth)
+            make.height.equalTo(150)
+        }
+        
+        pictureLabel.snp.makeConstraints { make in
+            make.left.equalTo(pictureButton.snp.left)
+            make.bottom.equalTo(pictureButton.snp.top).offset(-2)
+        }
+        
+        pictureButton.snp.makeConstraints { make in
+            make.top.equalTo(bioTextView.snp.bottom).offset(35)
+            make.left.equalTo(bioTextView.snp.left)
+            make.width.equalTo(UIScreen.main.bounds.width * 0.5)
+            make.height.equalTo(150)
+        }
+        
+        addJobButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-18)
+            make.right.equalTo(view.snp.centerX).offset(-20)
+            make.width.equalTo(100)
+            make.height.equalTo(40)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-18)
+            make.left.equalTo(view.snp.centerX).offset(20)
+            make.width.equalTo(100)
+            make.height.equalTo(40)
+        }
+    
     }
     
     @objc func showImagePicker(){
@@ -318,48 +293,45 @@ class AddJobViewController: UIViewController {
     
     @objc func addJob(){
         
-        let optionalTitle: String? = titleTextField.text
-        let optionalName: String? = nameTextField.text
-        let optionalEmail: String? = emailTextField.text
-        let optionalPrice: String? = priceTextField.text
-        let optionalBio: String? = bioTextView.text
+        let title:String = titleTextField.text ?? ""
+        let name:String = nameTextField.text ?? ""
+        let email:String = emailTextField.text ?? ""
+        let price:String = priceTextField.text ?? ""
+        let bio:String = bioTextView.text ?? ""
 
-        if let unwrappedTitle = optionalTitle, unwrappedTitle == "" {
-               titleErrorMessage.text = "Please enter the job title."
+
+        if title == "" {
+            titleErrorMessage.text = "Please enter the job title."
         } else {
             titleErrorMessage.text = ""
         }
         
-
-        if let unwrappedName = optionalName, unwrappedName == "" {
-               nameErrorMessage.text = "Please enter your name."
+        if name == "" {
+            nameErrorMessage.text = "Please enter your name."
         } else {
             nameErrorMessage.text = ""
         }
         
-        
-        if let unwrappedEmail = optionalEmail, unwrappedEmail == "" {
-               emailErrorMessage.text = "Please enter your email."
+        if email == "" {
+            emailErrorMessage.text = "Please enter your email."
         } else {
             emailErrorMessage.text = ""
         }
         
-        
-        if let unwrappedPrice = optionalPrice, unwrappedPrice == "" {
-               priceErrorMessage.text = "Please enter a price."
+        if price == "" {
+            priceErrorMessage.text = "Please enter a price."
         } else {
             priceErrorMessage.text = ""
         }
         
-        
-        if let unwrappedBio = optionalBio, unwrappedBio == "" {
-               bioErrorMessage.text = "Please enter some information about the job."
-        } else{
+        if bio == "" {
+            bioErrorMessage.text = "Please enter some information about the job."
+        } else {
             bioErrorMessage.text = ""
         }
         
         
-        if let title = optionalTitle, let name = optionalName, let email = optionalEmail, let price = optionalPrice, let bio = optionalBio, let picture = pictureButton.currentImage{
+        if let picture = pictureButton.currentImage{
             
             if title.isEmpty == false, name.isEmpty == false, email.isEmpty == false, price.isEmpty == false, bio.isEmpty == false{
                 delegate?.postJob(newTitle: title, newName: name, newEmail: email, newPrice: price, newBio: bio, newPicture: picture)
@@ -370,7 +342,6 @@ class AddJobViewController: UIViewController {
     
     @objc func cancel(){
          dismiss(animated: true, completion: nil)
-    
      }
 }
 
