@@ -8,5 +8,6 @@ target 'Employ-Me' do
   # Pods for Employ-Me
 
 pod 'SnapKit'
+pod 'Alamofire'
 
 end

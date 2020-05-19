@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         view.addSubview(jobCollectionView)
         
         setUpConstraints()
-        //getJobs()
+        getCourses()
     }
     
     func setUpConstraints(){
@@ -95,10 +95,9 @@ class ViewController: UIViewController {
         }
     }
     
-    //func getJobs(){
-        //NetworkManager.getJobs()
-         
-    //}
+    func getCourses(){
+        NetworkManager.getCourses()
+    }
     
     @objc func pushDetailsViewController(){
         if let indexPath = self.jobCollectionView.indexPathsForSelectedItems?.first{
