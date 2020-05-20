@@ -9,25 +9,21 @@
 import Foundation
 import UIKit
 
-class Job {
+class Job: Codable {
     var title: String
     var name: String
     var email: String
     var price: String
     var bio: String
-    var picture: UIImage
+    //var picture: UIImage
     
-    
-    
-    init(title: String, name: String, email: String, price: String, bio: String, picture: UIImage) {
+    init(title: String, name: String, email: String, price: String, bio: String /*, picture: UIImage*/) {
         self.title = title
         self.name = name
         self.email = email
         self.price = price
         self.bio = bio
-        self.picture = picture
-        
-
+        //self.picture = picture
     }
     
 }

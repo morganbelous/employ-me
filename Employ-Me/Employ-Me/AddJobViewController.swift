@@ -9,7 +9,13 @@
 import UIKit
 import SnapKit
 
+protocol AddJobViewControllerDelegate: class {
+    func willBeDismissed()
+}
+
 class AddJobViewController: UIViewController {
+    
+    weak var delegate: AddJobViewControllerDelegate?
     
     var viewTitle: UILabel!
 
@@ -40,7 +46,7 @@ class AddJobViewController: UIViewController {
     
     let fieldWidth: CGFloat = UIScreen.main.bounds.width * 0.7
     
-    weak var delegate: addJobDelegate?
+    //weak var delegate: addJobDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -282,7 +288,6 @@ class AddJobViewController: UIViewController {
             make.width.equalTo(100)
             make.height.equalTo(40)
         }
-    
     }
     
     @objc func showImagePicker(){
@@ -331,13 +336,17 @@ class AddJobViewController: UIViewController {
         }
         
         
-        if let picture = pictureButton.currentImage{
+        //if let picture = pictureButton.currentImage{
             
             if title.isEmpty == false, name.isEmpty == false, email.isEmpty == false, price.isEmpty == false, bio.isEmpty == false{
-                delegate?.postJob(newTitle: title, newName: name, newEmail: email, newPrice: price, newBio: bio, newPicture: picture)
-                dismiss(animated: true, completion: nil)
+                
+                NetworkManager.createJob(title: title, name: name, email: email, price: price, bio: bio, completion: { job in
+                    self.delegate?.willBeDismissed()
+                    self.dismiss(animated: true)
+                })
+                //delegate?.postJob(newTitle: title, newName: name, newEmail: email, newPrice: price, newBio: bio /*, newPicture: picture */)
             }
-        }
+        //}
     }
     
     @objc func cancel(){

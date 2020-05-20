@@ -16,7 +16,7 @@ class DetailsViewController: UIViewController {
     var jobEmail: String
     var jobBio: String
     var jobPrice: String
-    var jobPicture: UIImage
+    /*var jobPicture: UIImage */
     
     var titleLabel: UILabel!
     var nameLabel: UILabel!
@@ -24,7 +24,7 @@ class DetailsViewController: UIViewController {
     var priceLabel: UILabel!
     var bioTextView: UITextView!
     
-    var pictureView: UIImageView!
+    //var pictureView: UIImageView!
     var pictureBox: UIView!
     
     var moneyImageView: UIImageView!
@@ -33,13 +33,13 @@ class DetailsViewController: UIViewController {
     let pictureWidth: CGFloat = UIScreen.main.bounds.width * 0.3
     let iconWidth: CGFloat = UIScreen.main.bounds.width * 0.1
     
-    init(jobTitle: String, jobName: String, jobEmail: String, jobPrice: String, jobBio: String, jobPicture: UIImage) {
+    init(jobTitle: String, jobName: String, jobEmail: String, jobPrice: String, jobBio: String /*, jobPicture: UIImage */) {
         self.jobTitle = jobTitle
         self.jobName = jobName
         self.jobEmail = jobEmail
         self.jobPrice = jobPrice
         self.jobBio = jobBio
-        self.jobPicture = jobPicture
+        //self.jobPicture = jobPicture
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -94,12 +94,12 @@ class DetailsViewController: UIViewController {
         pictureBox.layer.shadowOffset = CGSize(width: 1, height: 1)
         view.addSubview(pictureBox)
         
-        pictureView = UIImageView()
+       /* pictureView = UIImageView()
         pictureView.image = jobPicture
         pictureView.contentMode = .scaleAspectFill
         pictureView.layer.cornerRadius = 10
         pictureView.clipsToBounds = true
-        view.addSubview(pictureView)
+        view.addSubview(pictureView) */
     
         moneyImageView = UIImageView()
         moneyImageView.image = UIImage(named: "dollar.png")
@@ -145,11 +145,11 @@ class DetailsViewController: UIViewController {
             make.left.equalTo(view).offset(18)
         }
         
-        pictureView.snp.makeConstraints { make in
+       /* pictureView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
             make.centerX.equalTo(view)
             make.width.height.equalTo(pictureWidth)
-        }
+        } */
         
         pictureBox.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
@@ -168,11 +168,7 @@ class DetailsViewController: UIViewController {
             make.centerY.equalTo(emailLabel.snp.centerY).offset(1)
             make.width.height.equalTo(iconWidth)
         }
-     
-        
     }
-
-
 }
 
 

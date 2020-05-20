@@ -62,7 +62,7 @@ class JobCollectionViewCell: UICollectionViewCell {
         titleLabel.text = job.title
         nameLabel.text = job.name
         priceLabel.text = job.price
-        pictureView.image = job.picture
+        //pictureView.image = job.picture
     }
     
     func setUpConstraints(){
