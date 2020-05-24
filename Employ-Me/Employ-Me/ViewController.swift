@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         view.addSubview(addJobButton)
         
         //let job1 = Job(title: "Artist", name: "Sam White", email: "stw34@cornell.edu", price: "price varies", bio: "Hi everyone! My name is Sam and I have been making artwork for as long as I can remember. If you would a portrait done, some artwork for you wall, or anything in between, reach out! I have reasonable prices." /*, picture: UIImage(named: "artist.jpg")!*/)
-        //let job2 = Job(title: "Physics Tutor", name: "Matt Smith", email: "med3@cornell.edu", price: "$20 an hour", bio: "I am a junior physics major in the College of Arts and Sciences. I am offering tutoring for the following classes: PHYS 1112, PHYS 2213, and PHYS 2214. I am willing to meet up at any place and I am very flexible on times. Reach out if you're interested!" /*, picture: UIImage(named: "physics-tutor.jpg")!*/)
+        //let job2 = Job(title: "Physics Tutor", name: "Matt Smith", email: "mes3@cornell.edu", price: "$20 an hour", bio: "I am a junior physics major in the College of Arts and Sciences. I am offering tutoring for the following classes: PHYS 1112, PHYS 2213, and PHYS 2214. I am willing to meet up at any place and I am very flexible on times. Reach out if you're interested!" /*, picture: UIImage(named: "physics-tutor.jpg")!*/)
         //let job3 = Job(title: "Makeup Artist", name: "Victoria Jones", email: "vlj234@cornell.edu", price: "price varies", bio: "Hello! My name is Victoria and I have a passion for makeup. I love helping people feel more confident by enhancing their natural beauty. I am very experienced with all types of looks, from natural, to full coverage, to special artwork. If you have a date night, photoshoot, or anything else special coming up, I would love to help! I am willing to travel anywhere on Cornell's campus to get to a client." /*, picture: UIImage(named: "makeup-artist.jpg")! */)
         //let job4 = Job(title: "Web Designer", name: "Amanda Chen", email: "aec455@cornell.edu", price: "price varies", bio: "Hi! My name is Amanda and I love web design. I love making websites accessible to all users and making them aesthetically pleasing. I love graphic design, drawing, and painting. Being a senior information science major, I have a lot of experience working with clients. I love making people's visions come to life! If you need a web or mobile app designer, please reach out!" /*, picture: UIImage(named: "web-designer.jpg")! */)
         
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
     @objc func pushDetailsViewController(){
         if let indexPath = self.jobCollectionView.indexPathsForSelectedItems?.first{
             let job = jobs[indexPath.row]
-            let detailsViewController = DetailsViewController(jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio /*, jobPicture: job.picture */)
+            let detailsViewController = DetailsViewController(jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName)
             navigationController?.pushViewController(detailsViewController, animated: true)
         }
     }

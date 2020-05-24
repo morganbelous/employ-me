@@ -62,7 +62,7 @@ class JobCollectionViewCell: UICollectionViewCell {
         titleLabel.text = job.title
         nameLabel.text = job.name
         priceLabel.text = job.price
-        //pictureView.image = job.picture
+        pictureView.image = UIImage(named: job.imageName)
     }
     
     func setUpConstraints(){
@@ -94,9 +94,7 @@ class JobCollectionViewCell: UICollectionViewCell {
             make.width.equalTo(contentView.frame.width * 0.4)
         }
         
-    }
-
-      
+    }   
     
 }
 
