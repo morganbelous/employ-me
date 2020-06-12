@@ -71,7 +71,7 @@ class SignInViewController: UIViewController {
     }
     
     @objc func didSignIn()  {
-      navigationController?.pushViewController(ViewController(), animated: true)
+      navigationController?.pushViewController(TabViewController(), animated: true)
     }
 
     deinit {

@@ -33,7 +33,6 @@ class ViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: true);
 
-        title = "Employ Me"
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
         
