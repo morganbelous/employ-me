@@ -51,7 +51,6 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Job"
         
         
         titleLabel = UILabel()

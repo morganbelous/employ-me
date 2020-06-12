@@ -17,6 +17,7 @@
 		6321FD8E24344C55007544DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD8D24344C55007544DB /* ViewController.swift */; };
 		6321FD9024344C60007544DB /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD8F24344C60007544DB /* DetailsViewController.swift */; };
 		6321FD9224344C71007544DB /* AddJobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6321FD9124344C71007544DB /* AddJobViewController.swift */; };
+		63763D7924930FF700BA93C8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63763D7824930FF700BA93C8 /* SignInViewController.swift */; };
 		63F373AB247376DF00526016 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F373AA247376DF00526016 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		6321FD8D24344C55007544DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6321FD8F24344C60007544DB /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		6321FD9124344C71007544DB /* AddJobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJobViewController.swift; sourceTree = "<group>"; };
+		63763D7824930FF700BA93C8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		63F373AA247376DF00526016 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9340D51C9DEF1469DD46995E /* Pods-Employ-Me.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Employ-Me.debug.xcconfig"; path = "Target Support Files/Pods-Employ-Me/Pods-Employ-Me.debug.xcconfig"; sourceTree = "<group>"; };
 		D196F05601E841CE4CA57211 /* Pods_Employ_Me.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Employ_Me.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				6321FD7524344A73007544DB /* AppDelegate.swift */,
+				63763D7824930FF700BA93C8 /* SignInViewController.swift */,
 				6321FD8D24344C55007544DB /* ViewController.swift */,
 				6321FD9124344C71007544DB /* AddJobViewController.swift */,
 				6321FD8F24344C60007544DB /* DetailsViewController.swift */,
@@ -123,6 +126,7 @@
 				6321FD6F24344A73007544DB /* Frameworks */,
 				6321FD7024344A73007544DB /* Resources */,
 				764C40B782B33B7A48748AEA /* [CP] Embed Pods Frameworks */,
+				AACF7BA15E78FDC244D915EF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,6 +223,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AACF7BA15E78FDC244D915EF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Employ-Me/Pods-Employ-Me-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -230,6 +251,7 @@
 				6321FD7624344A73007544DB /* AppDelegate.swift in Sources */,
 				6321FD8E24344C55007544DB /* ViewController.swift in Sources */,
 				63F373AB247376DF00526016 /* NetworkManager.swift in Sources */,
+				63763D7924930FF700BA93C8 /* SignInViewController.swift in Sources */,
 				6321FD8A24344C22007544DB /* Job.swift in Sources */,
 				6321FD9224344C71007544DB /* AddJobViewController.swift in Sources */,
 				6321FD9024344C60007544DB /* DetailsViewController.swift in Sources */,

@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import GoogleSignIn
 
 /*protocol addJobDelegate: class {
     func postJob(newTitle: String, newName: String, newEmail: String, newPrice: String, newBio: String /*, newPicture: UIImage */)
@@ -21,13 +22,16 @@ class ViewController: UIViewController {
     var searchBar: UISearchBar!
     var isSearching: Bool! = false
     var addJobButton: UIButton!
+    var signOutButton: UIButton!
     
     let jobCellReuseIdentifier = "jobCellReuseIdentifier"
     let sidePadding: CGFloat = 8
     let topPadding: CGFloat = 20
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.setHidesBackButton(true, animated: true);
 
         title = "Employ Me"
         view.backgroundColor = .white
@@ -48,11 +52,19 @@ class ViewController: UIViewController {
         
         addJobButton = UIButton()
         addJobButton.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
-        addJobButton.setTitle("Add job", for: .normal)
+        addJobButton.setTitle(" + ", for: .normal)
         addJobButton.setTitleColor(.white, for: .normal)
         addJobButton.layer.cornerRadius = 10
         addJobButton.addTarget(self, action: #selector(presentAddJobViewController), for: .touchUpInside)
         view.addSubview(addJobButton)
+        
+        signOutButton = UIButton()
+        signOutButton.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
+        signOutButton.setTitle("Sign Out", for: .normal)
+        signOutButton.setTitleColor(.white, for: .normal)
+        signOutButton.layer.cornerRadius = 10
+        signOutButton.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
+        view.addSubview(signOutButton)
         
         //let job1 = Job(title: "Artist", name: "Sam White", email: "stw34@cornell.edu", price: "price varies", bio: "Hi everyone! My name is Sam and I have been making artwork for as long as I can remember. If you would a portrait done, some artwork for you wall, or anything in between, reach out! I have reasonable prices." /*, picture: UIImage(named: "artist.jpg")!*/)
         //let job2 = Job(title: "Physics Tutor", name: "Matt Smith", email: "mes3@cornell.edu", price: "$20 an hour", bio: "I am a junior physics major in the College of Arts and Sciences. I am offering tutoring for the following classes: PHYS 1112, PHYS 2213, and PHYS 2214. I am willing to meet up at any place and I am very flexible on times. Reach out if you're interested!" /*, picture: UIImage(named: "physics-tutor.jpg")!*/)
@@ -80,14 +92,21 @@ class ViewController: UIViewController {
         
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: sidePadding, bottom: 0, right: 100))
+            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 100))
             make.height.equalTo(40)
         }
         
         addJobButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.left.equalTo(view).offset(sidePadding)
+            make.right.equalTo(searchBar.snp.left)
+            make.height.equalTo(40)
+        }
+        
+        signOutButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             make.right.equalTo(view).offset(-sidePadding)
-            make.left.equalTo(searchBar.snp.right).offset(sidePadding)
+            make.left.equalTo(searchBar.snp.right)
             make.height.equalTo(40)
         }
         
@@ -117,6 +136,12 @@ class ViewController: UIViewController {
         let addJobViewController = AddJobViewController()
         addJobViewController.delegate = self
         present(addJobViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapSignOut(_ sender: AnyObject) {
+        //print("Signing out")
+        GIDSignIn.sharedInstance().signOut()
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

@@ -9,5 +9,6 @@ target 'Employ-Me' do
 
 pod 'SnapKit'
 pod 'Alamofire'
+pod 'GoogleSignIn'
 
 end
