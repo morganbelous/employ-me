@@ -20,6 +20,7 @@
 		632850F524940E5B00F730AE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632850F424940E5B00F730AE /* ProfileViewController.swift */; };
 		632850F724940E7500F730AE /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632850F624940E7500F730AE /* TabViewController.swift */; };
 		63763D7924930FF700BA93C8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63763D7824930FF700BA93C8 /* SignInViewController.swift */; };
+		6390C08F2494579B006D03A8 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6390C08E2494579B006D03A8 /* MainNavigationController.swift */; };
 		63F373AB247376DF00526016 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F373AA247376DF00526016 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		632850F424940E5B00F730AE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		632850F624940E7500F730AE /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		63763D7824930FF700BA93C8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		6390C08E2494579B006D03A8 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		63F373AA247376DF00526016 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9340D51C9DEF1469DD46995E /* Pods-Employ-Me.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Employ-Me.debug.xcconfig"; path = "Target Support Files/Pods-Employ-Me/Pods-Employ-Me.debug.xcconfig"; sourceTree = "<group>"; };
 		D196F05601E841CE4CA57211 /* Pods_Employ_Me.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Employ_Me.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				6321FD7524344A73007544DB /* AppDelegate.swift */,
+				6390C08E2494579B006D03A8 /* MainNavigationController.swift */,
 				63763D7824930FF700BA93C8 /* SignInViewController.swift */,
 				6321FD8D24344C55007544DB /* ViewController.swift */,
 				6321FD9124344C71007544DB /* AddJobViewController.swift */,
@@ -256,6 +259,7 @@
 				6321FD8C24344C38007544DB /* JobCollectionViewCell.swift in Sources */,
 				6321FD7624344A73007544DB /* AppDelegate.swift in Sources */,
 				6321FD8E24344C55007544DB /* ViewController.swift in Sources */,
+				6390C08F2494579B006D03A8 /* MainNavigationController.swift in Sources */,
 				63F373AB247376DF00526016 /* NetworkManager.swift in Sources */,
 				63763D7924930FF700BA93C8 /* SignInViewController.swift in Sources */,
 				6321FD8A24344C22007544DB /* Job.swift in Sources */,

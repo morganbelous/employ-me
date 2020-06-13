@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         //let newVC = user == nil ? SignInViewController() : UINavigationController(rootViewController: TabViewController())
         window = UIWindow(frame: UIScreen.main.bounds)
         //window?.rootViewController = newVC
-        window?.rootViewController = UINavigationController(rootViewController: SignInViewController())
+        window?.rootViewController = MainNavigationController()
         window?.makeKeyAndVisible()
         return true
     }

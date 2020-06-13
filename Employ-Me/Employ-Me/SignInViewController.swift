@@ -14,6 +14,8 @@ class SignInViewController: UIViewController {
     
     var titleLabel: UILabel!
     var gSignIn: GIDSignInButton!
+    
+    var delegate: NotifySignInDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +78,8 @@ class SignInViewController: UIViewController {
     }
     
     @objc func didSignIn()  {
-        print("hi")
-      navigationController?.pushViewController(TabViewController(), animated: true)
-        //dismiss(animated: true, completion: nil)
+        delegate?.notifySignIn()
+        dismiss(animated: true, completion: nil)
     }
 
     deinit {
