@@ -15,8 +15,4 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .white
     }
-    
-
-
-
 }

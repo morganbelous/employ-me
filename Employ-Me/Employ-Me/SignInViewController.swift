@@ -30,6 +30,7 @@ class SignInViewController: UIViewController {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         // Automatically sign in the user.
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+       
         
         gSignIn = GIDSignInButton()
         view.addSubview(gSignIn)
@@ -50,6 +51,11 @@ class SignInViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     func setupConstraints(){
         
         titleLabel.snp.makeConstraints { make in
@@ -64,14 +70,15 @@ class SignInViewController: UIViewController {
         }
     }
     
-    
     @IBAction func didTapSignOut(_ sender: AnyObject) {
         print("Signing out")
       GIDSignIn.sharedInstance().signOut()
     }
     
     @objc func didSignIn()  {
+        print("hi")
       navigationController?.pushViewController(TabViewController(), animated: true)
+        //dismiss(animated: true, completion: nil)
     }
 
     deinit {

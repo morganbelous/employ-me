@@ -19,7 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = "1079096784974-4debgmp175bepc8dfmbnaqpkb0k55miu.apps.googleusercontent.com"
         GIDSignIn.sharedInstance()?.delegate = self
         
+        //GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        //let user = GIDSignIn.sharedInstance()?.currentUser
+        //let newVC = user == nil ? SignInViewController() : UINavigationController(rootViewController: TabViewController())
         window = UIWindow(frame: UIScreen.main.bounds)
+        //window?.rootViewController = newVC
         window?.rootViewController = UINavigationController(rootViewController: SignInViewController())
         window?.makeKeyAndVisible()
         return true
@@ -36,8 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         } else {
             print("\(error.localizedDescription)")
         }
-
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "SuccessfulSignInNotification"), object: nil, userInfo: nil)
         return
 
       }
@@ -47,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
       let fullName = user.profile.name
       //let givenName = user.profile.givenName
       //let email = user.profile.email
-      //print(fullName)
+      print(fullName)
         
 
       NotificationCenter.default.post(name: Notification.Name(rawValue: "SuccessfulSignInNotification"),

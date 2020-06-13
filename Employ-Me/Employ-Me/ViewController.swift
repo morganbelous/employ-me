@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: true);
 
+
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
         
@@ -138,9 +139,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
-        //print("Signing out")
+        print("Signing out")
         GIDSignIn.sharedInstance().signOut()
-        self.navigationController?.popToRootViewController(animated: true)
+        let loginController = SignInViewController()
+        loginController.modalPresentationStyle = .fullScreen
+        present(loginController, animated: true, completion: nil)
+        //self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

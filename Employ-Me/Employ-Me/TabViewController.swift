@@ -13,6 +13,7 @@ class TabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: true);
         tabBar.barTintColor = .lightGray
         setupTabBar()
     }
@@ -29,7 +30,6 @@ class TabViewController: UITabBarController {
         for item in items {
             item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
         }
-        
     }
 
 }
@@ -37,13 +37,11 @@ class TabViewController: UITabBarController {
 extension UITabBarController {
     
     func createNavController(vc: UIViewController, selected: UIImage, unselected: UIImage) -> UIViewController {
-        
         let viewController = vc
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.image = unselected
         navController.tabBarItem.selectedImage = selected
         return navController
-
     }
     
     
