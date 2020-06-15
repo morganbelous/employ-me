@@ -112,7 +112,6 @@ class DetailsViewController: UIViewController {
         
         
         setUpConstraints()
-
     }
     
     func setUpConstraints(){

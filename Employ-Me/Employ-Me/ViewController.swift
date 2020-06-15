@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     var filteredJobs: [Job] = []
     var searchBar: UISearchBar!
     var isSearching: Bool! = false
-    var addJobButton: UIButton!
     var signOutButton: UIButton!
     
     let jobCellReuseIdentifier = "jobCellReuseIdentifier"
@@ -30,6 +29,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadJobs), name: NSNotification.Name("Reload Jobs"), object: nil)
         
         self.navigationItem.setHidesBackButton(true, animated: true);
 
@@ -49,14 +50,6 @@ class ViewController: UIViewController {
         searchBarText?.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         searchBar.delegate = self
         view.addSubview(searchBar)
-        
-        addJobButton = UIButton()
-        addJobButton.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
-        addJobButton.setTitle(" + ", for: .normal)
-        addJobButton.setTitleColor(.white, for: .normal)
-        addJobButton.layer.cornerRadius = 10
-        addJobButton.addTarget(self, action: #selector(presentAddJobViewController), for: .touchUpInside)
-        view.addSubview(addJobButton)
         
         signOutButton = UIButton()
         signOutButton.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
@@ -92,14 +85,7 @@ class ViewController: UIViewController {
         
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 100))
-            make.height.equalTo(40)
-        }
-        
-        addJobButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.left.equalTo(view).offset(sidePadding)
-            make.right.equalTo(searchBar.snp.left)
+            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: sidePadding, bottom: 0, right: 100))
             make.height.equalTo(40)
         }
         
@@ -124,18 +110,16 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc func reloadJobs() {
+        getJobs()
+    }
+    
     @objc func pushDetailsViewController(){
         if let indexPath = self.jobCollectionView.indexPathsForSelectedItems?.first{
             let job = jobs[indexPath.row]
             let detailsViewController = DetailsViewController(jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName)
             navigationController?.pushViewController(detailsViewController, animated: true)
         }
-    }
-    
-    @objc func presentAddJobViewController(){
-        let addJobViewController = AddJobViewController()
-        addJobViewController.delegate = self
-        present(addJobViewController, animated: true, completion: nil)
     }
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
@@ -226,7 +210,8 @@ extension ViewController: UISearchBarDelegate{
 
 extension ViewController: AddJobViewControllerDelegate {
     func willBeDismissed() {
-        getJobs()
+        //reloadJobs()
+        self.jobCollectionView.reloadData()
     }
 }
 

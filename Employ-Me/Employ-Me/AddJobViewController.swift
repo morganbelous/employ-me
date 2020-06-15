@@ -15,7 +15,9 @@ protocol AddJobViewControllerDelegate: class {
 
 class AddJobViewController: UIViewController {
     
-    weak var delegate: AddJobViewControllerDelegate?
+    
+    
+    var delegate: AddJobViewControllerDelegate?
     
     var viewTitle: UILabel!
 

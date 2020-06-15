@@ -93,8 +93,6 @@ class JobCollectionViewCell: UICollectionViewCell {
             make.top.bottom.left.equalTo(box).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0))
             make.width.equalTo(contentView.frame.width * 0.4)
         }
-        
     }   
-    
 }
 
