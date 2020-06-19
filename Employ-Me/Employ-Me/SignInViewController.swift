@@ -20,7 +20,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didSignIn), name: NSNotification.Name("SuccessfulSignInNotification"), object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(self.didSignIn(_:)), name: NSNotification.Name(rawValue: "SuccessfulSignInNotification"), object: nil)
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
@@ -77,12 +77,16 @@ class SignInViewController: UIViewController {
       GIDSignIn.sharedInstance().signOut()
     }
     
-    @objc func didSignIn()  {
-        delegate?.notifySignIn()
-        dismiss(animated: true, completion: nil)
+    @objc func didSignIn(_ notification: NSNotification) {
+        //print(notification.userInfo ?? "")
+        if let dict = notification.userInfo as NSDictionary? {
+            //if let name = dict["name"] as? String, let email = dict["email"] as? String {
+            delegate?.notifySignIn(userDict: dict)
+            dismiss(animated: true, completion: nil)
+        }
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+//    deinit {
+//        NotificationCenter.default.removeObserver(self)
+//    }
 }

@@ -13,7 +13,21 @@ class ProfileViewController: UIViewController {
     
     var box: UIView!
     
+    var nameLabel: UILabel!
+    var emailLabel: UILabel!
     var addJobButton: UIButton!
+    var name: String!
+    var email: String!
+    
+    init(name: String, email: String){
+        self.name = name
+        self.email = email
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +37,19 @@ class ProfileViewController: UIViewController {
         box = UIView()
         box.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
         view.addSubview(box)
+        
+        nameLabel = UILabel()
+        nameLabel.text = name
+        nameLabel.font =  UIFont.boldSystemFont(ofSize: 20)
+        nameLabel.textColor = .black
+        view.addSubview(nameLabel)
+        
+        
+        emailLabel = UILabel()
+        emailLabel.text = email
+        emailLabel.font =  UIFont.boldSystemFont(ofSize: 16)
+        emailLabel.textColor = .black
+        view.addSubview(emailLabel)
         
         addJobButton = UIButton()
         addJobButton.backgroundColor = .black
@@ -36,7 +63,7 @@ class ProfileViewController: UIViewController {
         addJobButton.addTarget(self, action: #selector(presentAddJobViewController), for: .touchUpInside)
         view.addSubview(addJobButton)
         
-        setupConstraints()   
+        setupConstraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +76,16 @@ class ProfileViewController: UIViewController {
             make.top.equalTo(view)
             make.width.equalTo(view)
             make.height.equalTo(view.frame.height * 0.4)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.top).offset(200)
+        }
+        
+        emailLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.centerY.equalTo(nameLabel.snp.bottom).offset(20)
         }
         
         addJobButton.snp.makeConstraints { make in

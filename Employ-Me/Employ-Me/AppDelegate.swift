@@ -42,18 +42,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         return
 
-      }
-      // Perform any operations on signed in user here.
-      //let userId = user.userID                  // For client-side use only!
-      //let idToken = user.authentication.idToken // Safe to send to the server
-      let fullName = user.profile.name
-      //let givenName = user.profile.givenName
-      //let email = user.profile.email
-      print(fullName)
+        }
+        // Perform any operations on signed in user here.
+        //let userId = user.userID                  // For client-side use only!
+        //let idToken = user.authentication.idToken // Safe to send to the server
+        let fullName = user.profile.name  ?? "no name"
+        //let givenName = user.profile.givenName
+        let email = user.profile.email ?? "no email"
+    
         
-
-      NotificationCenter.default.post(name: Notification.Name(rawValue: "SuccessfulSignInNotification"),
-        object: nil, userInfo: ["statusText": "Signed in user:\n\(fullName!)"])
+        let userDict:[String: String] = ["name": fullName, "email": email]
+        //print("signed in")
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "SuccessfulSignInNotification"),
+        object: nil, userInfo: userDict)
     }
     
 

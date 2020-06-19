@@ -9,6 +9,18 @@
 import UIKit
 
 class TabViewController: UITabBarController {
+    
+    var userDict: NSDictionary!
+    
+    init(userDict: NSDictionary){
+        self.userDict = userDict
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +34,8 @@ class TabViewController: UITabBarController {
         
         let jobsController = createNavController(vc: ViewController(), selected: UIImage(named: "home-black.png")!, unselected: UIImage(named: "home-white.png")!)
         
-         let profileController = createNavController(vc: ProfileViewController(), selected: UIImage(named: "user-black.png")!, unselected: UIImage(named: "user-white.png")!)
+        let profileVC = ProfileViewController(name: userDict["name"]! as! String, email: userDict["email"]! as! String)
+         let profileController = createNavController(vc: profileVC, selected: UIImage(named: "user-black.png")!, unselected: UIImage(named: "user-white.png")!)
         viewControllers = [jobsController, profileController]
         
         guard let items = tabBar.items else {return}
@@ -48,6 +61,4 @@ extension UITabBarController {
         navController.tabBarItem.selectedImage = selected
         return navController
     }
-    
-    
 }
