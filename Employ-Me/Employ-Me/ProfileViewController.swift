@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class ProfileViewController: UIViewController {
     var nameLabel: UILabel!
     var emailLabel: UILabel!
     var addJobButton: UIButton!
+    var signOutButton: UIButton!
     var name: String!
     var email: String!
     
@@ -63,6 +65,15 @@ class ProfileViewController: UIViewController {
         addJobButton.addTarget(self, action: #selector(presentAddJobViewController), for: .touchUpInside)
         view.addSubview(addJobButton)
         
+        signOutButton = UIButton()
+        signOutButton.backgroundColor = .black
+        signOutButton.setTitle("Log Out", for: .normal)
+        signOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        signOutButton.setTitleColor(.white, for: .normal)
+        signOutButton.layer.cornerRadius = 10
+        signOutButton.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
+        view.addSubview(signOutButton)
+        
         setupConstraints()
     }
     
@@ -94,12 +105,29 @@ class ProfileViewController: UIViewController {
             make.centerY.equalTo(box.snp.bottom)
             make.centerX.equalTo(view)
         }
+        
+        signOutButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.right.equalTo(view).offset(-8)
+            make.width.equalTo(80)
+            make.height.equalTo(40)
+        }
     }
     
     @objc func presentAddJobViewController(){
         let addJobViewController = AddJobViewController()
         addJobViewController.delegate = self
         present(addJobViewController, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func didTapSignOut(_ sender: AnyObject) {
+        print("Signing out")
+        GIDSignIn.sharedInstance().signOut()
+        let loginController = SignInViewController()
+        loginController.modalPresentationStyle = .fullScreen
+        present(loginController, animated: true, completion: nil)
+        //self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

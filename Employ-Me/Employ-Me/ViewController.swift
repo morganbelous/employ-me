@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     var filteredJobs: [Job] = []
     var searchBar: UISearchBar!
     var isSearching: Bool! = false
-    var signOutButton: UIButton!
     
     let jobCellReuseIdentifier = "jobCellReuseIdentifier"
     let sidePadding: CGFloat = 8
@@ -51,13 +50,6 @@ class ViewController: UIViewController {
         searchBar.delegate = self
         view.addSubview(searchBar)
         
-        signOutButton = UIButton()
-        signOutButton.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
-        signOutButton.setTitle("Sign Out", for: .normal)
-        signOutButton.setTitleColor(.white, for: .normal)
-        signOutButton.layer.cornerRadius = 10
-        signOutButton.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
-        view.addSubview(signOutButton)
         
         //let job1 = Job(title: "Artist", name: "Sam White", email: "stw34@cornell.edu", price: "price varies", bio: "Hi everyone! My name is Sam and I have been making artwork for as long as I can remember. If you would a portrait done, some artwork for you wall, or anything in between, reach out! I have reasonable prices." /*, picture: UIImage(named: "artist.jpg")!*/)
         //let job2 = Job(title: "Physics Tutor", name: "Matt Smith", email: "mes3@cornell.edu", price: "$20 an hour", bio: "I am a junior physics major in the College of Arts and Sciences. I am offering tutoring for the following classes: PHYS 1112, PHYS 2213, and PHYS 2214. I am willing to meet up at any place and I am very flexible on times. Reach out if you're interested!" /*, picture: UIImage(named: "physics-tutor.jpg")!*/)
@@ -85,17 +77,10 @@ class ViewController: UIViewController {
         
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: sidePadding, bottom: 0, right: 100))
+            make.left.right.equalTo(view).inset(UIEdgeInsets(top: 0, left: sidePadding, bottom: 0, right: sidePadding))
             make.height.equalTo(40)
         }
-        
-        signOutButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.right.equalTo(view).offset(-sidePadding)
-            make.left.equalTo(searchBar.snp.right)
-            make.height.equalTo(40)
-        }
-        
+    
         jobCollectionView.snp.makeConstraints { make in
             make.top.right.bottom.left.equalTo(view.safeAreaLayoutGuide).inset(UIEdgeInsets(top: 70, left: sidePadding, bottom: 0, right: sidePadding))
         }
@@ -122,14 +107,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func didTapSignOut(_ sender: AnyObject) {
-        print("Signing out")
-        GIDSignIn.sharedInstance().signOut()
-        let loginController = SignInViewController()
-        loginController.modalPresentationStyle = .fullScreen
-        present(loginController, animated: true, completion: nil)
-        //self.navigationController?.popToRootViewController(animated: true)
-    }
 }
 
 extension ViewController: UICollectionViewDataSource{
