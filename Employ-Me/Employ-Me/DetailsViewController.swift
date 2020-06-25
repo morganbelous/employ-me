@@ -41,7 +41,6 @@ class DetailsViewController: UIViewController {
         self.jobBio = jobBio
         self.jobImageName = jobImageName
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -51,7 +50,6 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         
         titleLabel = UILabel()
         titleLabel.text = jobTitle
@@ -109,7 +107,6 @@ class DetailsViewController: UIViewController {
         mailImageView.image = UIImage(named: "mail.png")
         mailImageView.clipsToBounds = true
         view.addSubview(mailImageView)
-        
         
         setUpConstraints()
     }

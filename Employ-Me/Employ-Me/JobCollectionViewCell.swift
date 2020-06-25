@@ -68,9 +68,8 @@ class JobCollectionViewCell: UICollectionViewCell {
     func setUpConstraints(){
         
         box.snp.makeConstraints { make in
-            make.top.bottom.equalTo(contentView)
+            make.top.bottom.left.equalTo(contentView).offset(5)
             make.right.equalTo(contentView).offset(-5)
-            make.left.equalTo(contentView).offset(5)
         }
         
         titleLabel.snp.makeConstraints { make in

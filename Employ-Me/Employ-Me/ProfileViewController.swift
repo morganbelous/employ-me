@@ -17,9 +17,13 @@ class ProfileViewController: UIViewController {
     var nameLabel: UILabel!
     var emailLabel: UILabel!
     var addJobButton: UIButton!
-    var signOutButton: UIButton!
     var name: String!
     var email: String!
+    
+    var myJobsCollectionView: UICollectionView!
+    var myJobs: [Job]! = []
+    let topPadding: CGFloat = 20
+    let jobCellReuseIdentifier = "jobCellReuseIdentifier"
     
     init(name: String, email: String){
         self.name = name
@@ -36,6 +40,15 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .white
         
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        //self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(didTapSignOut(_:)))
+        
         box = UIView()
         box.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
         view.addSubview(box)
@@ -45,7 +58,6 @@ class ProfileViewController: UIViewController {
         nameLabel.font =  UIFont.boldSystemFont(ofSize: 20)
         nameLabel.textColor = .black
         view.addSubview(nameLabel)
-        
         
         emailLabel = UILabel()
         emailLabel.text = email
@@ -59,28 +71,32 @@ class ProfileViewController: UIViewController {
         addJobButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         addJobButton.layer.shadowColor = UIColor.black.cgColor
         addJobButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        addJobButton.layer.cornerRadius = 50
+        addJobButton.layer.cornerRadius = 40 //half of height/width
         addJobButton.layer.shadowOpacity = 0.4
         addJobButton.layer.shadowRadius = 5
         addJobButton.addTarget(self, action: #selector(presentAddJobViewController), for: .touchUpInside)
         view.addSubview(addJobButton)
         
-        signOutButton = UIButton()
-        signOutButton.backgroundColor = .black
-        signOutButton.setTitle("Log Out", for: .normal)
-        signOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        signOutButton.setTitleColor(.white, for: .normal)
-        signOutButton.layer.cornerRadius = 10
-        signOutButton.addTarget(self, action: #selector(didTapSignOut(_:)), for: .touchUpInside)
-        view.addSubview(signOutButton)
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = topPadding
+        layout.minimumInteritemSpacing = topPadding
+        
+        myJobsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        myJobsCollectionView.backgroundColor = .white
+        myJobsCollectionView.register(JobCollectionViewCell.self, forCellWithReuseIdentifier: jobCellReuseIdentifier)
+        myJobsCollectionView.dataSource = self
+        myJobsCollectionView.delegate = self
+        view.addSubview(myJobsCollectionView)
         
         setupConstraints()
+        getMyJobs()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           navigationController?.setNavigationBarHidden(true, animated: animated)
-       }
+//    override func viewWillAppear(_ animated: Bool) {
+//           super.viewWillAppear(animated)
+//           navigationController?.setNavigationBarHidden(true, animated: animated)
+//       }
     
     func setupConstraints() {
         box.snp.makeConstraints { make in
@@ -91,7 +107,7 @@ class ProfileViewController: UIViewController {
         
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.top).offset(200)
+            make.centerY.equalTo(view.safeAreaLayoutGuide.snp.top).offset(100)
         }
         
         emailLabel.snp.makeConstraints { make in
@@ -100,17 +116,26 @@ class ProfileViewController: UIViewController {
         }
         
         addJobButton.snp.makeConstraints { make in
-            make.height.equalTo(100)
-            make.width.equalTo(100)
+            make.height.equalTo(80)
+            make.width.equalTo(80)
             make.centerY.equalTo(box.snp.bottom)
             make.centerX.equalTo(view)
         }
         
-        signOutButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+        myJobsCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(addJobButton.snp.bottom).offset(10)
+            make.left.equalTo(view).offset(8)
             make.right.equalTo(view).offset(-8)
-            make.width.equalTo(80)
-            make.height.equalTo(40)
+            make.bottom.equalTo(view)
+        }
+    }
+    
+    func getMyJobs(){
+        NetworkManager.getJobs() { myJobs in
+            self.myJobs = myJobs
+            DispatchQueue.main.async {
+                self.myJobsCollectionView.reloadData()
+            }
         }
     }
     
@@ -120,6 +145,13 @@ class ProfileViewController: UIViewController {
         present(addJobViewController, animated: true, completion: nil)
     }
     
+    @objc func pushDetailsViewController(){
+        if let indexPath = self.myJobsCollectionView.indexPathsForSelectedItems?.first{
+            let job = myJobs[indexPath.row]
+            let detailsViewController = DetailsViewController(jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName)
+            navigationController?.pushViewController(detailsViewController, animated: true)
+        }
+    }
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
         print("Signing out")
@@ -131,8 +163,39 @@ class ProfileViewController: UIViewController {
     }
 }
 
+extension ProfileViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myJobs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = myJobsCollectionView.dequeueReusableCell(withReuseIdentifier: jobCellReuseIdentifier, for: indexPath) as! JobCollectionViewCell
+            let job = myJobs[indexPath.item]
+            cell.configure(for: job)
+            return cell
+        }
+    }
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width
+        let height = width * 0.4
+        return CGSize(width: width, height: height)
+    }
+}
+
+extension ProfileViewController: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pushDetailsViewController()
+    }
+}
+
 extension ProfileViewController: AddJobViewControllerDelegate {
     func willBeDismissed() {
+        getMyJobs()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "Reload Jobs"), object: nil)
     }
 }
+
+
+

@@ -30,12 +30,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadJobs), name: NSNotification.Name("Reload Jobs"), object: nil)
-        
-        self.navigationItem.setHidesBackButton(true, animated: true);
-
+        //self.navigationItem.setHidesBackButton(true, animated: true)
 
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        //self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -64,7 +68,7 @@ class ViewController: UIViewController {
         
         jobCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         jobCollectionView.backgroundColor = .white
-         jobCollectionView.register(JobCollectionViewCell.self, forCellWithReuseIdentifier: jobCellReuseIdentifier)
+        jobCollectionView.register(JobCollectionViewCell.self, forCellWithReuseIdentifier: jobCellReuseIdentifier)
         jobCollectionView.dataSource = self
         jobCollectionView.delegate = self
         view.addSubview(jobCollectionView)
@@ -106,7 +110,6 @@ class ViewController: UIViewController {
             navigationController?.pushViewController(detailsViewController, animated: true)
         }
     }
-    
 }
 
 extension ViewController: UICollectionViewDataSource{
@@ -184,12 +187,12 @@ extension ViewController: UISearchBarDelegate{
     
 } */
 
-
-extension ViewController: AddJobViewControllerDelegate {
-    func willBeDismissed() {
-        //reloadJobs()
-        self.jobCollectionView.reloadData()
-    }
-}
+//dont think this ever gets used???
+//extension ViewController: AddJobViewControllerDelegate {
+//    func willBeDismissed() {
+//        //reloadJobs()
+//        self.jobCollectionView.reloadData()
+//    }
+//}
 
 
