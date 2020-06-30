@@ -24,6 +24,7 @@ class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate = self
         
         self.navigationItem.setHidesBackButton(true, animated: true);
         tabBar.barTintColor = .lightGray
@@ -60,5 +61,12 @@ extension UITabBarController {
         navController.tabBarItem.image = unselected
         navController.tabBarItem.selectedImage = selected
         return navController
+    }
+}
+
+extension UITabBarController: UITabBarControllerDelegate {
+    public func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let profileVC = tabBarController.viewControllers?[1] as! UINavigationController
+        profileVC.popViewController(animated: false)
     }
 }
