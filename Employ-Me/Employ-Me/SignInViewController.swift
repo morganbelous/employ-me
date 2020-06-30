@@ -24,7 +24,7 @@ class SignInViewController: UIViewController {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1).cgColor, UIColor.white.cgColor]
+        gradientLayer.colors = [UIColor(red: 77/255, green: 37/255, blue: 187/255, alpha: 1).cgColor, UIColor.white.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0) // Top left corner.
         gradientLayer.endPoint = CGPoint(x: 1, y: 1) // Bottom right corner.
         self.view.layer.insertSublayer(gradientLayer, at: 0)

@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(didTapSignOut(_:)))
         
         box = UIView()
-        box.backgroundColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
+        box.backgroundColor = UIColor(red: 78/255, green: 172/255, blue: 243/255, alpha: 1)
         view.addSubview(box)
         
         nameLabel = UILabel()
@@ -84,7 +84,7 @@ class ProfileViewController: UIViewController {
         
         myJobsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         myJobsCollectionView.backgroundColor = .white
-        myJobsCollectionView.register(JobCollectionViewCell.self, forCellWithReuseIdentifier: jobCellReuseIdentifier)
+        myJobsCollectionView.register(MyJobCollectionViewCell.self, forCellWithReuseIdentifier: jobCellReuseIdentifier)
         myJobsCollectionView.dataSource = self
         myJobsCollectionView.delegate = self
         view.addSubview(myJobsCollectionView)
@@ -131,8 +131,12 @@ class ProfileViewController: UIViewController {
     }
     
     func getMyJobs(){
-        NetworkManager.getJobs() { myJobs in
-            self.myJobs = myJobs
+        NetworkManager.getJobs() { allJobs in
+            for job in allJobs {
+                if (job.email.lowercased() == self.email.lowercased()) {
+                    self.myJobs.append(job)
+                }
+            }
             DispatchQueue.main.async {
                 self.myJobsCollectionView.reloadData()
             }
@@ -169,7 +173,7 @@ extension ProfileViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = myJobsCollectionView.dequeueReusableCell(withReuseIdentifier: jobCellReuseIdentifier, for: indexPath) as! JobCollectionViewCell
+        let cell = myJobsCollectionView.dequeueReusableCell(withReuseIdentifier: jobCellReuseIdentifier, for: indexPath) as! MyJobCollectionViewCell
             let job = myJobs[indexPath.item]
             cell.configure(for: job)
             return cell
@@ -178,9 +182,8 @@ extension ProfileViewController: UICollectionViewDataSource{
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width
-        let height = width * 0.4
-        return CGSize(width: width, height: height)
+        return CGSize(width: (view.frame.width / 2) - 20, height: 110)
+        
     }
 }
 

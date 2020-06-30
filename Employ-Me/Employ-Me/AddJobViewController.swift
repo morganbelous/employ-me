@@ -57,7 +57,7 @@ class AddJobViewController: UIViewController {
         
         viewTitle = UILabel()
         viewTitle.text = "Post a New Job!"
-        viewTitle.textColor = UIColor(red: 249/255, green: 184/255, blue: 19/255, alpha: 1)
+        viewTitle.textColor = UIColor(red: 77/255, green: 37/255, blue: 187/255, alpha: 1)
         viewTitle.font = UIFont.boldSystemFont(ofSize: 30)
         view.addSubview(viewTitle)
         

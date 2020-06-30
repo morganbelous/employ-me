@@ -53,32 +53,32 @@ class DetailsViewController: UIViewController {
         
         titleLabel = UILabel()
         titleLabel.text = jobTitle
-        titleLabel.textColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
+        titleLabel.textColor = UIColor(red: 77/255, green: 37/255, blue: 187/255, alpha: 1)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         view.addSubview(titleLabel)
         
         nameLabel = UILabel()
         nameLabel.text = jobName
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        nameLabel.textColor = UIColor(red: 249/255, green: 184/255, blue: 19/255, alpha: 1)
+        nameLabel.textColor = UIColor(red: 45/255, green: 119/255, blue: 223/255, alpha: 1)
         view.addSubview(nameLabel)
         
         emailLabel = UILabel()
         emailLabel.text = jobEmail
         emailLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        emailLabel.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
+        emailLabel.textColor = .black
         view.addSubview(emailLabel)
         
         priceLabel = UILabel()
         priceLabel.text = jobPrice
         priceLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        priceLabel.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
+        priceLabel.textColor = .black
         view.addSubview(priceLabel)
         
         bioTextView = UITextView()
         bioTextView.text = jobBio
         bioTextView.font = UIFont.boldSystemFont(ofSize: 20)
-        bioTextView.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
+        bioTextView.textColor = .black
         bioTextView.font = UIFont.systemFont(ofSize: 18)
         view.addSubview(bioTextView)
         

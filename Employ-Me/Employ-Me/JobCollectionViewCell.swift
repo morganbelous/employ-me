@@ -11,38 +11,40 @@ import SnapKit
 
 class JobCollectionViewCell: UICollectionViewCell {
     
-    var box: UIView!
-    
     var titleLabel: UILabel!
     var nameLabel: UILabel!
     var priceLabel: UILabel!
     var pictureView: UIImageView!
     
-    
     override init(frame: CGRect){
         super.init(frame: frame)
 
+        // shadow
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 1)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 1.0
+        self.layer.cornerRadius = 3
+        self.layer.masksToBounds = false
+        self.clipsToBounds = false
         
-        box = UIView()
-        box.backgroundColor = .white
-        box.layer.cornerRadius = 10
-        box.layer.shadowColor = UIColor.black.cgColor
-        box.layer.shadowRadius = 5
-        box.layer.shadowOpacity = 0.4
-        box.layer.shadowOffset = CGSize(width: 1, height: 1)
-        contentView.addSubview(box)
+        // round corners
+        self.contentView.layer.cornerRadius = 12.0
+        self.contentView.layer.borderWidth = 1.0
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        self.contentView.layer.masksToBounds = true
         
         titleLabel = UILabel()
-        titleLabel.textColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1)
+        titleLabel.textColor = .white
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25)
         contentView.addSubview(titleLabel)
         
         nameLabel = UILabel()
-        nameLabel.textColor = UIColor(red: 249/255, green: 184/255, blue: 19/255, alpha: 1)
+        nameLabel.textColor = .white
         contentView.addSubview(nameLabel)
         
         priceLabel = UILabel()
-        priceLabel.textColor = UIColor(red: 87/255, green: 88/255, blue: 89/255, alpha: 1)
+        priceLabel.textColor = .white
         contentView.addSubview(priceLabel)
         
         pictureView = UIImageView()
@@ -52,6 +54,7 @@ class JobCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(pictureView)
           
         setUpConstraints()
+        gradientBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
@@ -66,32 +69,31 @@ class JobCollectionViewCell: UICollectionViewCell {
     }
     
     func setUpConstraints(){
-        
-        box.snp.makeConstraints { make in
-            make.top.bottom.left.equalTo(contentView).offset(5)
-            make.right.equalTo(contentView).offset(-5)
-        }
-        
+    
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(box).offset(10)
+            make.top.equalTo(contentView).offset(10)
             make.left.equalTo(pictureView.snp.right).offset(20)
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(box).offset(50)
+            make.top.equalTo(contentView).offset(50)
             make.left.equalTo(pictureView.snp.right).offset(20)
         }
         
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(box).offset(80)
+            make.top.equalTo(contentView).offset(80)
             make.left.equalTo(pictureView.snp.right).offset(20)
         }
         
-        
         pictureView.snp.makeConstraints { make in
-            make.top.bottom.left.equalTo(box).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0))
+            make.top.bottom.left.equalTo(contentView).inset(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0))
             make.width.equalTo(contentView.frame.width * 0.4)
         }
-    }   
+    }
+    
+    func gradientBackgroundColor() {
+         let colors = cellRandomBackgroundColors()
+         self.contentView.setGradientBackgroundColor(colorOne: colors[0], colorTow: colors[1])
+     }
 }
 
