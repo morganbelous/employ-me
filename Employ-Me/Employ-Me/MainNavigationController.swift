@@ -27,14 +27,13 @@ class MainNavigationController: UINavigationController {
         
         if (user == nil) {
             //only reach here if not logged in on initial load
-            print(false)
            // isLoggedIn = false
             perform(#selector(showLoginController), with: nil, afterDelay: 0.01)
         } else {
             //assume log in
             //only get here on first load if already logged in
            // isLoggedIn = true
-            logInUser(userDict: ["name":user?.profile.name!, "email":user?.profile.email!])
+            logInUser(userDict: ["name":user?.profile.name! as Any, "email":user?.profile.email! as Any])
         }  
     }
     

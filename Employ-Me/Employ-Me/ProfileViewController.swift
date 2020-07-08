@@ -131,6 +131,7 @@ class ProfileViewController: UIViewController {
     }
     
     func getMyJobs(){
+        myJobs = []
         NetworkManager.getJobs() { allJobs in
             for job in allJobs {
                 if (job.email.lowercased() == self.email.lowercased()) {

@@ -34,6 +34,7 @@ class AddJobViewController: UIViewController {
     
     var pictureLabel: UILabel!
     var picture: UIImage!
+    var base64String: String = ""
     var pictureButton: UIButton!
     var imagePicker = UIImagePickerController()
     
@@ -153,7 +154,7 @@ class AddJobViewController: UIViewController {
 
         addJobButton = UIButton()
         addJobButton.setTitle("Post Job", for: .normal)
-        addJobButton.setTitleColor(UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1), for: .normal)
+        addJobButton.setTitleColor(UIColor(red: 78/255, green: 172/255, blue: 243/255, alpha: 1), for: .normal)
         addJobButton.layer.borderWidth = 2
         addJobButton.layer.borderColor = UIColor(red: 50/255, green: 162/255, blue: 242/255, alpha: 1).cgColor
         addJobButton.layer.cornerRadius = 10
@@ -298,6 +299,14 @@ class AddJobViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    // encode string
+    func convertImageToBase64String (img: UIImage) -> String {
+        //return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+        let imageData = img.jpegData(compressionQuality: 1)
+        let imageBase64String = imageData?.base64EncodedString()
+        return (imageBase64String ?? "Could not encode image to Base64")
+    }
+    
     @objc func addJob(){
         
         let title:String = titleTextField.text ?? ""
@@ -342,7 +351,7 @@ class AddJobViewController: UIViewController {
             
             if title.isEmpty == false, name.isEmpty == false, email.isEmpty == false, price.isEmpty == false, bio.isEmpty == false{
                 
-                NetworkManager.createJob(title: title, name: name, email: email, price: price, bio: bio, completion: { job in
+                NetworkManager.createJob(title: title, name: name, email: email, price: price, bio: bio, imageName: base64String, completion: { job in
                     self.delegate?.willBeDismissed()
                     self.dismiss(animated: true)
                 })
@@ -361,6 +370,7 @@ extension AddJobViewController: UIImagePickerControllerDelegate, UINavigationCon
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             pictureButton.setImage(image, for: .normal)
             picture = image
+            base64String = convertImageToBase64String(img: picture)
         }
         dismiss(animated: true, completion: nil)
     }

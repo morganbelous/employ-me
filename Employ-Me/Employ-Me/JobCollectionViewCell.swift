@@ -14,6 +14,7 @@ class JobCollectionViewCell: UICollectionViewCell {
     var titleLabel: UILabel!
     var nameLabel: UILabel!
     var priceLabel: UILabel!
+    var base64Image: UIImage!
     var pictureView: UIImageView!
     
     override init(frame: CGRect){
@@ -65,7 +66,11 @@ class JobCollectionViewCell: UICollectionViewCell {
         titleLabel.text = job.title
         nameLabel.text = job.name
         priceLabel.text = job.price
-        pictureView.image = UIImage(named: job.imageName)
+        // decode string
+        let newImageData = Data(base64Encoded: job.imageName)
+        if let newImageData = newImageData {
+           pictureView.image = UIImage(data: newImageData)
+        }
     }
     
     func setUpConstraints(){

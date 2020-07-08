@@ -92,7 +92,11 @@ class DetailsViewController: UIViewController {
         view.addSubview(pictureBox)
         
         pictureView = UIImageView()
-        pictureView.image = UIImage(named: jobImageName)
+        // decode string
+        let newImageData = Data(base64Encoded: jobImageName)
+        if let newImageData = newImageData {
+           pictureView.image = UIImage(data: newImageData)
+        }
         pictureView.contentMode = .scaleAspectFill
         pictureView.layer.cornerRadius = 10
         pictureView.clipsToBounds = true

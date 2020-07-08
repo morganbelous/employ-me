@@ -35,13 +35,14 @@ class NetworkManager {
         }
     }
     
-    static func createJob (title: String, name: String, email: String, price: String, bio: String, completion: @escaping ((Job) -> Void)     ) {
+    static func createJob (title: String, name: String, email: String, price: String, bio: String, imageName: String, completion: @escaping ((Job) -> Void)     ) {
         let parameters: [String: Any] = [
             "title": title,
             "name": name,
             "email": email,
             "price": price,
-            "bio": bio
+            "bio": bio,
+            "imageName": imageName
         ]
 
         Alamofire.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseData {response in
