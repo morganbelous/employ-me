@@ -15,10 +15,11 @@ struct APIResponse<T: Codable>: Codable {
 }
 
 let endpoint = "https://employme-app.herokuapp.com/api/jobs/"
+let deleteEndpoint = "https://employme-app.herokuapp.com/api/job/"
 
 class NetworkManager {
    
-    static func getJobs(completion: @escaping (([Job]) -> Void) ) {
+    static func getJobs(completion: @escaping (([Job]) -> Void)) {
         Alamofire.request(endpoint, method: .get).validate().responseData { response in
             switch response.result {
             case .success(let data):
@@ -35,7 +36,7 @@ class NetworkManager {
         }
     }
     
-    static func createJob (title: String, name: String, email: String, price: String, bio: String, imageName: String, completion: @escaping ((Job) -> Void)     ) {
+    static func createJob (title: String, name: String, email: String, price: String, bio: String, imageName: String, completion: @escaping ((Job) -> Void)) {
         let parameters: [String: Any] = [
             "title": title,
             "name": name,
@@ -59,5 +60,19 @@ class NetworkManager {
             }
         }   
     }
-  
+    
+    static func deleteJob(id: Int, completion: @escaping ((Job) -> Void)) {
+        Alamofire.request(deleteEndpoint + String(id) + "/", method: .delete).validate().responseData { response in
+            switch response.result {
+            case .success(let data):
+                let decoder = JSONDecoder()
+                if let jobData = try? decoder.decode(APIResponse<Job>.self, from: data){
+                    let job = jobData.data
+                    completion(job)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

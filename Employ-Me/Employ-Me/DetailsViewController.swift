@@ -11,12 +11,18 @@ import SnapKit
 
 class DetailsViewController: UIViewController {
     
+    var delegate: AddOrRemoveJobDelegate?
+    
+    var jobId: Int
     var jobTitle: String
     var jobName: String
     var jobEmail: String
     var jobBio: String
     var jobPrice: String
     var jobImageName: String
+    var myJob: Bool
+    
+    var deleteJobButton: UIButton!
     
     var titleLabel: UILabel!
     var nameLabel: UILabel!
@@ -33,13 +39,15 @@ class DetailsViewController: UIViewController {
     let pictureWidth: CGFloat = UIScreen.main.bounds.width * 0.3
     let iconWidth: CGFloat = UIScreen.main.bounds.width * 0.1
     
-    init(jobTitle: String, jobName: String, jobEmail: String, jobPrice: String, jobBio: String , jobImageName: String ) {
+    init(jobId: Int, jobTitle: String, jobName: String, jobEmail: String, jobPrice: String, jobBio: String, jobImageName: String, myJob: Bool) {
+        self.jobId = jobId
         self.jobTitle = jobTitle
         self.jobName = jobName
         self.jobEmail = jobEmail
         self.jobPrice = jobPrice
         self.jobBio = jobBio
         self.jobImageName = jobImageName
+        self.myJob = myJob
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,6 +58,11 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        deleteJobButton  = UIButton()
+        deleteJobButton.setImage(UIImage(named: "trash"), for: .normal)
+        deleteJobButton.addTarget(self, action: #selector(deleteJob), for: .touchUpInside)
+        view.addSubview(deleteJobButton)
         
         titleLabel = UILabel()
         titleLabel.text = jobTitle
@@ -113,9 +126,17 @@ class DetailsViewController: UIViewController {
         view.addSubview(mailImageView)
         
         setUpConstraints()
+        displayDeleteButton()
     }
     
     func setUpConstraints(){
+        
+        deleteJobButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(2)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+            make.right.equalTo(view).offset(-20)
+        }
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view)
@@ -168,6 +189,20 @@ class DetailsViewController: UIViewController {
             make.width.height.equalTo(iconWidth)
         }
     }
+    
+    func displayDeleteButton() {
+        if (self.myJob == false) {
+            deleteJobButton.isHidden = true
+        }
+    }
+    
+    @objc func deleteJob() {
+        NetworkManager.deleteJob(id: jobId, completion: { job in
+            self.delegate?.willBeDismissed()
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
 }
+
 
 

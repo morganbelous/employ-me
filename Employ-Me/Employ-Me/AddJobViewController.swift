@@ -9,15 +9,9 @@
 import UIKit
 import SnapKit
 
-protocol AddJobViewControllerDelegate: class {
-    func willBeDismissed()
-}
-
 class AddJobViewController: UIViewController {
     
-    
-    
-    var delegate: AddJobViewControllerDelegate?
+    var delegate: AddOrRemoveJobDelegate?
     
     var viewTitle: UILabel!
 
@@ -359,10 +353,10 @@ class AddJobViewController: UIViewController {
             }
         //}
     }
-    
+
     @objc func cancel(){
-         dismiss(animated: true, completion: nil)
-     }
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension AddJobViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

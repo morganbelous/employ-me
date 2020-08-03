@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 import GoogleSignIn
 
+protocol AddOrRemoveJobDelegate: class {
+    func willBeDismissed()
+}
+
+
 class ProfileViewController: UIViewController {
     
     var box: UIView!
@@ -72,8 +77,9 @@ class ProfileViewController: UIViewController {
         addJobButton.layer.shadowColor = UIColor.black.cgColor
         addJobButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         addJobButton.layer.cornerRadius = 40 //half of height/width
-        addJobButton.layer.shadowOpacity = 0.4
+        addJobButton.layer.shadowOpacity = 1
         addJobButton.layer.shadowRadius = 5
+        addJobButton.layer.shouldRasterize = true
         addJobButton.addTarget(self, action: #selector(presentAddJobViewController), for: .touchUpInside)
         view.addSubview(addJobButton)
         
@@ -153,7 +159,8 @@ class ProfileViewController: UIViewController {
     @objc func pushDetailsViewController(){
         if let indexPath = self.myJobsCollectionView.indexPathsForSelectedItems?.first{
             let job = myJobs[indexPath.row]
-            let detailsViewController = DetailsViewController(jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName)
+            let detailsViewController = DetailsViewController(jobId: job.id, jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName, myJob: true)
+            detailsViewController.delegate = self
             navigationController?.pushViewController(detailsViewController, animated: true)
         }
     }
@@ -194,12 +201,9 @@ extension ProfileViewController: UICollectionViewDelegate{
     }
 }
 
-extension ProfileViewController: AddJobViewControllerDelegate {
+extension ProfileViewController: AddOrRemoveJobDelegate {
     func willBeDismissed() {
         getMyJobs()
         NotificationCenter.default.post(name: Notification.Name(rawValue: "Reload Jobs"), object: nil)
     }
 }
-
-
-

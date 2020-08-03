@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     @objc func pushDetailsViewController(){
         if let indexPath = self.jobCollectionView.indexPathsForSelectedItems?.first{
             let job = jobs[indexPath.row]
-            let detailsViewController = DetailsViewController(jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName)
+            let detailsViewController = DetailsViewController(jobId: job.id, jobTitle: job.title, jobName: job.name, jobEmail: job.email, jobPrice: job.price, jobBio: job.bio, jobImageName: job.imageName, myJob: false)
             navigationController?.pushViewController(detailsViewController, animated: true)
         }
     }
